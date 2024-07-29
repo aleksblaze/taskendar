@@ -1,3 +1,6 @@
-# taskendar
+# Taskendar
+Taskendar is a calendar where you can add all your tasks and check up on their completion.
 
-A calendar where you can add all your tasks and check their completion.
+## Contact
+Telegram - @aleksblaze
+Email - alekshak232@gmail.com
