@@ -3,7 +3,7 @@
 
 ## Requirements
 
-To use Taskendar, the following requierements aplly:
+To use **Taskendar**, the following requierements aplly:
 - a phone 
 - another phone (in case u wanna use it on both ur phones)*
 
