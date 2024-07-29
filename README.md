@@ -16,6 +16,6 @@ You open the app, click on any day you want to add a task on, press "Add a task"
 ## Contact
 If you'll have any problems using Taskendar contact me through:
 
-Telegram - @aleksblaze
+**Telegram** - @aleksblaze
 
-Email - alekshak232@gmail.com
+**Email** - alekshak232@gmail.com
