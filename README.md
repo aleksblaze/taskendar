@@ -5,7 +5,7 @@ Taskendar is a calendar where you can add all your tasks and check up on their c
 
 To use Taskendar, the following requierements aplly:
 - a phone 
-- another phone* (in case u wanna use it on both ur phones)
+- *another phone* (in case u wanna use it on both ur phones)
 
 ## Installation
 The installation guide will definitely be here once I figure out how to create one.
