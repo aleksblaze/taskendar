@@ -11,7 +11,7 @@ To use **Taskendar**, the following requierements aplly:
 The installation guide will definitely be here once I figure out how to create one.
 
 ## Usage
-You open the app, click on any day you want to add a task on, press "Add a task" or whatever name I give it and choose the task. Volla! You have added a task!
+You open the app, click on any day you want to add a task on, press "Add a task" or whatever name I give it and choose the task. Volla! You have added a task! Now when that day comes you will receive a notification.
 
 ## Contact
 If you'll have any problems using Taskendar contact me through:
