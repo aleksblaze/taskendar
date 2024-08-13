@@ -3,7 +3,7 @@
 
 
 ## App work
-![image](https://github.com/aleksblaze/taskendar/ezgif-4-9d07efa9f3.gif)
+![image](https://github.com/taskendar/ezgif-4-9d07efa9f3.gif)
 
 ## App scheme
 ![image](https://github.com/user-attachments/assets/6a6ad36c-1f61-450e-95a5-0a5c9e7c5afe)
