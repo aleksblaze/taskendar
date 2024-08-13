@@ -1,6 +1,10 @@
 # Taskendar
 **Taskendar** is a calendar where you can add all your tasks and check up on their completion. The application was created to make it easier for you to keep track of your tasks and daily routine.
 
+
+## App work
+![image](https://github.com/user-attachments/assets/5de17a82-cc89-4f34-b417-045938fd4a4f)
+
 ## App scheme
 ![image](https://github.com/user-attachments/assets/6a6ad36c-1f61-450e-95a5-0a5c9e7c5afe)
 
@@ -23,3 +27,4 @@ If you'll have any problems using Taskendar contact me through:
 **Telegram** - @aleksblaze
 
 **Email** - alekshak232@gmail.com
+
