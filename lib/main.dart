@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -26,77 +27,45 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppTitle),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
+      title: Text(AppTitle),
+      leading: IconButton(
+        icon: Icon(Icons.settings),
+        onPressed: () {
+         Navigator.push(
+            context,
+              MaterialPageRoute(builder: (context) => SettingsPage()),
+          );
+        },
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.green,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TasksPage()),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()),
-                );
-              },
-            ),
-          ],
+      actions: [
+        IconButton(
+        icon: Icon(Icons.app_registration),
+        onPressed: () {
+          Navigator.push(
+            context,
+              MaterialPageRoute(builder: (context) => TasksPage()),
+            );
+          },
         ),
-      ),
+      ],
+    ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
         Text(
           '*There will be a calendar here, but it is not implemented yet.*',
           style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
           ),
         ),
         SizedBox(height: 16),
         Text(
           'Upcoming Events: (will be a lot lower on the page)',
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
           ),
         ),
         SizedBox(height: 8),
@@ -114,10 +83,9 @@ class HomePage extends StatelessWidget {
           'Moms birthday - Date',
           style: TextStyle(fontSize: 16),
         ),
-          ],
-        ),
+        ],
       ),
-        );
-      }
-    }
-
+      ),
+    );
+  }
+}
