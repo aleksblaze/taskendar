@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskendar/tasks.dart';
+import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
 
 void main() {
@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: AppTitle,
       theme: ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.green,
       ),
       home: HomePage(),
@@ -22,7 +23,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +51,9 @@ class HomePage extends StatelessWidget {
             context,
               MaterialPageRoute(builder: (context) => TasksPage()),
             );
+            setState(() {
+              
+            });
           },
         ),
       ],
