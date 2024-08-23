@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
+import 'package:taskendar/models/task.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(TaskInheritedWidget(
+    taskList: [],
+    child: MyApp(),
+  ));
 }
 
 const AppTitle = 'Taskendar';

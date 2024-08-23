@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:taskendar/global.dart';
 import 'package:taskendar/models/task.dart';
 
 class TaskCreator extends StatefulWidget {
@@ -20,10 +19,11 @@ class _TaskCreatorState extends State<TaskCreator> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != DateTime.now())
+    if (picked != null && picked != DateTime.now()) {
       setState(() {
         _dateController.text = "${picked.toLocal()}".split(' ')[0];
       });
+    }
   }
 
   Future<void> _selectTime(BuildContext context) async {
@@ -31,30 +31,31 @@ class _TaskCreatorState extends State<TaskCreator> {
       context: context,
       initialTime: TimeOfDay.now(),
     );
-    if (picked != null)
+    if (picked != null) {
       setState(() {
         _timeController.text = picked.format(context);
       });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Task Creator'),
+        title: const Text('Task Creator'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               onChanged: (value) {
                 setState(() {
                   _taskName = value;
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Enter task name',
                 border: OutlineInputBorder(),
               ),
@@ -66,25 +67,25 @@ class _TaskCreatorState extends State<TaskCreator> {
                   _taskDescription = value;
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Enter task description',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: _dateController,
               decoration: InputDecoration(
                 labelText: 'Select date',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.calendar_today),
+                  icon: const Icon(Icons.calendar_today),
                   onPressed: () => _selectDate(context),
                 ),
               ),
               readOnly: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: _timeController,
               decoration: InputDecoration(
@@ -97,9 +98,9 @@ class _TaskCreatorState extends State<TaskCreator> {
               ),
               readOnly: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
-              child: Text('Add task'),
+              child: const Text('Add task'),
               onPressed: () {
                 Task task = Task(
                   name: _taskName,
@@ -108,7 +109,7 @@ class _TaskCreatorState extends State<TaskCreator> {
                   time: TimeOfDay.now(),
                 );
 
-                taskList.add(task);
+                TaskInheritedWidget.of(context)?.taskList.add(task);
                 Navigator.pop(context);
               },
             ),

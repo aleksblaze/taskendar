@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'taskCreator.dart';
 import 'package:taskendar/global.dart';
-import 'package:taskendar/models/task.dart';
+import 'package:taskendar/models/task.dart'; 
 
 class TasksPage extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _TasksPageState extends State<TasksPage> {
                       MaterialPageRoute(builder: (context) => TaskCreator()),
                     );
                     setState(() {
-                      taskList.sort((a, b) => a.date.compareTo(b.date));
+                      TaskInheritedWidget.of(context)!.taskList.sort((a, b) => a.date.compareTo(b.date));
                     });
                   },
                   child: const Text('Create Task'),
@@ -40,9 +40,9 @@ class _TasksPageState extends State<TasksPage> {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: taskList.length,
+              itemCount: TaskInheritedWidget.of(context)!.taskList.length,
               itemBuilder: (context, index) {
-                Task task = taskList[index];
+                Task task = TaskInheritedWidget.of(context)!.taskList[index];
                 return ListTile(
                   title: Text(task.name),
                   subtitle: Text(task.description),
