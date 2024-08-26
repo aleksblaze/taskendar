@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
 
 class TaskCreator extends StatefulWidget {
@@ -109,7 +110,7 @@ class _TaskCreatorState extends State<TaskCreator> {
                   time: TimeOfDay.now(),
                 );
 
-                TaskInheritedWidget.of(context)?.taskList.add(task);
+                context.read<TaskProvider>().addTask(task);
                 Navigator.pop(context);
               },
             ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'taskCreator.dart';
 import 'package:taskendar/global.dart';
-import 'package:taskendar/models/task.dart'; 
+import 'package:taskendar/models/task.dart';
 
 class TasksPage extends StatefulWidget {
   @override
@@ -28,9 +29,7 @@ class _TasksPageState extends State<TasksPage> {
                       context,
                       MaterialPageRoute(builder: (context) => TaskCreator()),
                     );
-                    setState(() {
-                      TaskInheritedWidget.of(context)!.taskList.sort((a, b) => a.date.compareTo(b.date));
-                    });
+                    context.read<TaskProvider>().sortTasks();
                   },
                   child: const Text('Create Task'),
                 ),
@@ -39,15 +38,19 @@ class _TasksPageState extends State<TasksPage> {
           ),
           const SizedBox(height: 20),
           Expanded(
-            child: ListView.builder(
-              itemCount: TaskInheritedWidget.of(context)!.taskList.length,
-              itemBuilder: (context, index) {
-                Task task = TaskInheritedWidget.of(context)!.taskList[index];
-                return ListTile(
-                  title: Text(task.name),
-                  subtitle: Text(task.description),
-                  trailing: Text(
-                      '${shortDateToString(task.date)} ${task.time.format(context)}'),
+            child: Consumer<TaskProvider>(
+              builder: (context, taskProvider, child) {
+                return ListView.builder(
+                  itemCount: taskProvider.taskList.length,
+                  itemBuilder: (context, index) {
+                    Task task = taskProvider.taskList[index];
+                    return ListTile(
+                      title: Text(task.name),
+                      subtitle: Text(task.description),
+                      trailing: Text(
+                          '${shortDateToString(task.date)} ${task.time.format(context)}'),
+                    );
+                  },
                 );
               },
             ),
