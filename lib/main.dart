@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:taskendar/tasks/taskCreator.dart';
 
 void main() {
   runApp(
@@ -18,13 +20,35 @@ const AppTitle = 'Taskendar';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final GoRouter _router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => HomePage(),
+        ),
+        GoRoute(
+          path: '/tasks',
+          builder: (context, state) => TasksPage(),
+        ),
+        GoRoute(
+          path: '/settings',
+          builder: (context, state) => SettingsPage(),
+        ),
+        GoRoute(
+          path: '/task_creator',
+          builder: (context, state) => TaskCreator(),
+        ),
+      ],
+    );
+
+    return MaterialApp.router(
       title: AppTitle,
       theme: ThemeData(
         useMaterial3: false,
         primarySwatch: Colors.green,
       ),
-      home: HomePage(),
+      routerDelegate: _router.routerDelegate,
+      routeInformationParser: _router.routeInformationParser,
       debugShowCheckedModeBanner: false,
     );
   }
@@ -43,22 +67,12 @@ class _HomePageState extends State<HomePage> {
         title: Text(AppTitle),
         leading: IconButton(
           icon: Icon(Icons.settings),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsPage()),
-            );
-          },
+          onPressed: () => context.go('/settings'),
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.app_registration),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TasksPage()),
-              );
-            },
+            onPressed: () => context.go('/tasks'),
           ),
         ],
       ),

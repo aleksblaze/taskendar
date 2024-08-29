@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'taskCreator.dart';
 import 'package:taskendar/global.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:go_router/go_router.dart';
 
 class TasksPage extends StatefulWidget {
   @override
@@ -25,10 +25,7 @@ class _TasksPageState extends State<TasksPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TaskCreator()),
-                    );
+                    context.go('/task_creator');
                     context.read<TaskProvider>().sortTasks();
                   },
                   child: const Text('Create Task'),
