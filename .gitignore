@@ -43,7 +43,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 test.dart
-pubspec.lock
-pubspec.yaml
-/windows/flutter/CMakeLists.txt
 /windows/runner/flutter_window.cpp
