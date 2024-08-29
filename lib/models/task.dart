@@ -13,8 +13,9 @@ class Task {
     required this.time,
   });
 }
+
 class TaskInheritedWidget extends InheritedWidget {
-  final List<Task> taskList ;
+  final List<Task> taskList;
 
   const TaskInheritedWidget({
     Key? key,
@@ -29,5 +30,22 @@ class TaskInheritedWidget extends InheritedWidget {
   @override
   bool updateShouldNotify(TaskInheritedWidget oldWidget) {
     return oldWidget.taskList != taskList;
+  }
+}
+
+
+class TaskProvider with ChangeNotifier {
+  List<Task> _taskList = [];
+
+  List<Task> get taskList => _taskList;
+
+  void addTask(Task task) {
+    _taskList.add(task);
+    notifyListeners();
+  }
+
+  void sortTasks() {
+    _taskList.sort((a, b) => a.date.compareTo(b.date));
+    notifyListeners();
   }
 }
