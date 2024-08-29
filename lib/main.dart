@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => TaskCreator(),
         ),
       ],
+      errorBuilder: (context, state) => ErrorPage(error: state.error),
     );
 
     return MaterialApp.router(
@@ -67,12 +68,16 @@ class _HomePageState extends State<HomePage> {
         title: Text(AppTitle),
         leading: IconButton(
           icon: Icon(Icons.settings),
-          onPressed: () => context.go('/settings'),
+          onPressed: () {
+            context.go('/settings');
+          },
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.app_registration),
-            onPressed: () => context.go('/tasks'),
+            onPressed: () {
+              context.go('/tasks');
+            },
           ),
         ],
       ),
@@ -111,6 +116,26 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 16),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+class ErrorPage extends StatelessWidget {
+  final Exception? error;
+
+  const ErrorPage({Key? key, this.error}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Error'),
+      ),
+      body: Center(
+        child: Text(
+          error?.toString() ?? 'Unknown error',
+          style: TextStyle(fontSize: 18, color: Colors.red),
         ),
       ),
     );
