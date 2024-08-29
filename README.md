@@ -3,7 +3,8 @@
 
 
 ## App work
-![](ezgif-4-9d07efa9f3.gif)
+
+![](screen-capture (1).gif)
 
 ## App scheme
 ![image](https://github.com/user-attachments/assets/6a6ad36c-1f61-450e-95a5-0a5c9e7c5afe)
