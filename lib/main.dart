@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:taskendar/tasks/tasks.dart';
-import 'package:taskendar/settings.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:taskendar/router.dart';
 
 void main() {
   runApp(
@@ -14,22 +14,6 @@ void main() {
 }
 
 const AppTitle = 'Taskendar';
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppTitle,
-      theme: ThemeData(
-        useMaterial3: false,
-        primarySwatch: Colors.green,
-      ),
-      home: HomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
@@ -44,20 +28,14 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsPage()),
-            );
+            context.go('/settings');
           },
         ),
         actions: [
           IconButton(
             icon: Icon(Icons.app_registration),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TasksPage()),
-              );
+              context.go('/tasks');
             },
           ),
         ],
@@ -97,6 +75,26 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 16),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+class ErrorPage extends StatelessWidget {
+  final Exception? error;
+
+  const ErrorPage({Key? key, this.error}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Error'),
+      ),
+      body: Center(
+        child: Text(
+          error?.toString() ?? 'Unknown error',
+          style: TextStyle(fontSize: 18, color: Colors.red),
         ),
       ),
     );

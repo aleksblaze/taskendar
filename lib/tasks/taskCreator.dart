@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
-
+import 'package:go_router/go_router.dart';
 class TaskCreator extends StatefulWidget {
   @override
   _TaskCreatorState createState() => _TaskCreatorState();
@@ -111,7 +111,7 @@ class _TaskCreatorState extends State<TaskCreator> {
                 );
 
                 context.read<TaskProvider>().addTask(task);
-                Navigator.pop(context);
+                context.go('/tasks');
               },
             ),
           ],
