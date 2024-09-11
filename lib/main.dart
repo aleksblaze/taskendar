@@ -47,9 +47,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
         primarySwatch: Colors.green,
-      ),
-      routerDelegate: _router.routerDelegate,
-      routeInformationParser: _router.routeInformationParser,
+      ),      
+      routerConfig: _router,      
       debugShowCheckedModeBanner: false,
     );
   }
