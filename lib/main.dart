@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:taskendar/unifiedWidgets/appbarUni.dart';
+import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
+import 'package:taskendar/tasks/taskCreator.dart';
 
 void main() {
   runApp(
@@ -24,13 +27,20 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
         primarySwatch: Colors.green,
       ),
-      home: HomePage(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => HomePage(),
+        '/tasks': (context) => TasksPage(),
+        '/settings': (context) => SettingsPage(),
+        '/taskCreator': (context) => TaskCreatorPage(),
+      },
     );
   }
 }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -39,29 +49,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppTitle),
-        leading: IconButton(
-          icon: Icon(Icons.settings),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsPage()),
-            );
-          },
-        ),
+      appBar: CustomAppBar(
+        title: AppTitle,
         actions: [
           IconButton(
             icon: Icon(Icons.app_registration),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TasksPage()),
-              );
+              Navigator.pushNamed(context, '/tasks');
             },
           ),
         ],
       ),
+      drawer: CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 600) {

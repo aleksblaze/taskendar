@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:taskendar/tasks/taskCreator.dart';
 import 'package:provider/provider.dart';
-import 'taskCreator.dart';
-import 'package:taskendar/global.dart';
+import 'package:taskendar/unifiedWidgets/taskCreatorUni.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:taskendar/unifiedWidgets/appbarUni.dart';
 
 class TasksPage extends StatefulWidget {
   @override
@@ -13,8 +14,8 @@ class _TasksPageState extends State<TasksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tasks'),
+      appBar: CustomAppBar(
+        title: 'Tasks',
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -32,9 +33,11 @@ class _TasksPageState extends State<TasksPage> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TaskCreator()),
+                                builder: (context) => TaskCreatorPage()),
                           );
-                          context.read<TaskProvider>().sortTasks();
+                          if (mounted) {
+                            context.read<TaskProvider>().sortTasks();
+                          }
                         },
                         child: const Text('Create Task'),
                       ),
@@ -43,27 +46,12 @@ class _TasksPageState extends State<TasksPage> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: Consumer<TaskProvider>(
-                    builder: (context, taskProvider, child) {
-                      return ListView.builder(
-                        itemCount: taskProvider.taskList.length,
-                        itemBuilder: (context, index) {
-                          Task task = taskProvider.taskList[index];
-                          return ListTile(
-                            title: Text(task.name),
-                            subtitle: Text(task.description),
-                            trailing: Text(
-                                '${shortDateToString(task.date)} ${task.time.format(context)}'),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  child: TaskList(),
                 ),
               ],
             );
           } else {
-            // layout for desktop devices
+            // Layout for desktop devices
             return Row(
               children: [
                 Expanded(
@@ -78,9 +66,11 @@ class _TasksPageState extends State<TasksPage> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TaskCreator()),
+                                builder: (context) => TaskCreatorPage()),
                           );
-                          context.read<TaskProvider>().sortTasks();
+                          if (mounted) {
+                            context.read<TaskProvider>().sortTasks();
+                          }
                         },
                         child: const Text('Create Task'),
                       ),
@@ -89,22 +79,7 @@ class _TasksPageState extends State<TasksPage> {
                 ),
                 Expanded(
                   flex: 3,
-                  child: Consumer<TaskProvider>(
-                    builder: (context, taskProvider, child) {
-                      return ListView.builder(
-                        itemCount: taskProvider.taskList.length,
-                        itemBuilder: (context, index) {
-                          Task task = taskProvider.taskList[index];
-                          return ListTile(
-                            title: Text(task.name),
-                            subtitle: Text(task.description),
-                            trailing: Text(
-                                '${shortDateToString(task.date)} ${task.time.format(context)}'),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                  child: TaskList(),
                 ),
               ],
             );
