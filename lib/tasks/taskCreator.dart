@@ -111,7 +111,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
                 );
 
                 context.read<TaskProvider>().addTask(task);
-                Navigator.pop(context);
+                context.go('/tasks');
               },
             ),
           ],

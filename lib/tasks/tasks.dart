@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:taskendar/unifiedWidgets/taskCreatorUni.dart';
 import 'package:taskendar/models/task.dart';
 import 'package:taskendar/unifiedWidgets/appbarUni.dart';
+import 'package:taskendar/global.dart';
+import 'package:taskendar/models/task.dart';
 
 class TasksPage extends StatefulWidget {
   @override
