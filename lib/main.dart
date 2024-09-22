@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
-import 'package:taskendar/unifiedWidgets/appbarUni.dart';
 import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
 import 'package:taskendar/tasks/taskCreator.dart';
-import 'package:taskendar/router.dart';
+import 'package:taskendar/settings.dart';
+import 'package:taskendar/tasks/tasks.dart';
 
 
 void main() {
@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () {
+            Navigator.pushNamed(context, '/settings');
             context.go('/settings');
           },
         ),

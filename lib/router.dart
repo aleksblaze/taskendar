@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
           path: '/task_creator',
-          builder: (context, state) => TaskCreator(),
+          builder: (context, state) => TaskCreatorPage(),
         ),
       ],
       errorBuilder: (context, state) => ErrorPage(error: state.error),
