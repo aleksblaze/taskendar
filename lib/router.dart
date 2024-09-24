@@ -5,6 +5,8 @@ import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
 import 'package:taskendar/tasks/taskCreator.dart';
 
+const String AppTitle = 'Taskendar';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,6 @@ class MyApp extends StatelessWidget {
           builder: (context, state) => TaskCreatorPage(),
         ),
       ],
-      errorBuilder: (context, state) => ErrorPage(error: state.error),
     );
 
     return MaterialApp.router(

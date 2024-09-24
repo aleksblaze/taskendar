@@ -1,69 +1,94 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
 import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
 import 'package:taskendar/tasks/taskCreator.dart';
 import 'package:taskendar/settings.dart';
 import 'package:taskendar/tasks/tasks.dart';
-
+import 'package:taskendar/models/themeProvider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => TaskProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TaskProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider(ThemeData.light())),
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
+      ],
       child: MyApp(),
     ),
   );
 }
 
-const AppTitle = 'Taskendar';
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppTitle,
-      theme: ThemeData(
-        useMaterial3: false,
-        primarySwatch: Colors.green,
-      ),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => HomePage(),
-        '/tasks': (context) => TasksPage(),
-        '/settings': (context) => SettingsPage(),
-        '/taskCreator': (context) => TaskCreatorPage(),
+    return Consumer2<ThemeProvider, LocaleProvider>(
+      builder: (context, themeProvider, localeProvider, child) {
+        return MaterialApp(
+          title: 'Taskendar',
+          theme: themeProvider.themeData,
+          locale: localeProvider.locale,
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', ''), // English
+            const Locale('uk', ''), // Ukrainian
+          ],
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/': (context) => HomePage(),
+            '/tasks': (context) => TasksPage(),
+            '/settings': (context) => SettingsPage(),
+            '/taskCreator': (context) => TaskCreatorPage(),
+          },
+        );
       },
     );
   }
 }
+
+class LocaleProvider with ChangeNotifier {
+  Locale _locale = Locale('en');
+
+  Locale get locale => _locale;
+
+  void setLocale(Locale locale) {
+    _locale = locale;
+    notifyListeners();
+  }
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppTitle),
+        title: Text(AppLocalizations.of(context)!.homeTitle),
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () {
             Navigator.pushNamed(context, '/settings');
-            context.go('/settings');
           },
         ),
-
         actions: [
           IconButton(
             icon: Icon(Icons.app_registration),
             onPressed: () {
               Navigator.pushNamed(context, '/tasks');
-              context.go('/tasks');
             },
           ),
         ],
@@ -74,110 +99,15 @@ class _HomePageState extends State<HomePage> {
           if (constraints.maxWidth < 600) {
             // layout for mobile devices
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '*There will be a calendar here, but it is not implemented yet.*',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'Upcoming Events: (will be a lot lower on the page)',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Date - Tomorrow',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'New Year - in 2 days',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Moms birthday - Date',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
+              child: Text(AppLocalizations.of(context)!.homeTitle),
             );
           } else {
-            // layout for desktop devices
+            // layout for larger screens
             return Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '*There will be a calendar here, but it is not implemented yet.*',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Upcoming Events: (will be a lot lower on the page)',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Date - Tomorrow',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'New Year - in 2 days',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Moms birthday - Date',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              child: Text(AppLocalizations.of(context)!.homeTitle),
             );
           }
         },
-      ),
-    );
-  }
-}
-class ErrorPage extends StatelessWidget {
-  final Exception? error;
-
-  const ErrorPage({Key? key, this.error}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Error'),
-      ),
-      body: Center(
-        child: Text(
-          error?.toString() ?? 'Unknown error',
-          style: TextStyle(fontSize: 18, color: Colors.red),
-        ),
       ),
     );
   }
