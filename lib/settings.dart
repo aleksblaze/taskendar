@@ -8,24 +8,23 @@ class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
-
 class _SettingsPageState extends State<SettingsPage> {
   bool switchValue = false;
   String _selectedTheme = 'Light';
   String _selectedLanguage = 'en';
-
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.settings),
+        title: Text(localization.settings),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SwitchListTile(
-              title: Text(AppLocalizations.of(context)!.notifications),
+              title: Text(localization.notifications),
               value: switchValue,
               onChanged: (value) {
                 setState(() {
@@ -34,13 +33,13 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context)!.theme),
+              title: Text(localization.theme),
               trailing: DropdownButton<String>(
                 value: _selectedTheme,
                 items: <String>['Light', 'Dark'].map((String value) {
                   return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(value == 'Light' ? AppLocalizations.of(context)!.light : AppLocalizations.of(context)!.dark),
+                  child: Text(value == 'Light' ? localization.light : localization.dark),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
@@ -54,13 +53,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             ListTile(
-              title: Text(AppLocalizations.of(context)!.language),
+              title: Text(localization.language),
               trailing: DropdownButton<String>(
                 value: _selectedLanguage,
                 items: <String>['en', 'uk'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value == 'en' ? AppLocalizations.of(context)!.english : AppLocalizations.of(context)!.ukrainian),
+                    child: Text(value == 'en' ? localization.english : localization.ukrainian),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
