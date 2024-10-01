@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "appTitle": "Taskendar",
+  "homeTitle": "Home",
+  "settings": "Settings",
+  "tasks": "Tasks",
+  "createTask": "Create Task",
+  "taskCreator": "Task Creator",
+  "enterTaskName": "Enter task name",
+  "enterTaskDescription": "Enter task description",
+  "selectDate": "Select date",
+  "selectTime": "Select time",
+  "addTask": "Add task",
+  "notifications": "Notifications",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "language": "Language",
+  "english": "English",
+  "ukrainian": "Українська"
+}
