@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:taskendar/unifiedWidgets/taskCreatorUni.dart';
 import 'package:taskendar/models/task.dart';
 import 'package:taskendar/unifiedWidgets/appbarUni.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
 
 class TasksPage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Tasks',
+        title: AppLocalizations.of(context)!.tasks, 
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -39,7 +40,7 @@ class _TasksPageState extends State<TasksPage> {
                             context.read<TaskProvider>().sortTasks();
                           }
                         },
-                        child: const Text('Create Task'),
+                        child: Text(AppLocalizations.of(context)!.createTask), 
                       ),
                     ),
                   ),
@@ -72,7 +73,7 @@ class _TasksPageState extends State<TasksPage> {
                             context.read<TaskProvider>().sortTasks();
                           }
                         },
-                        child: const Text('Create Task'),
+                        child: Text(AppLocalizations.of(context)!.createTask), // Localized button text
                       ),
                     ),
                   ),
