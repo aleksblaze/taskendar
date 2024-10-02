@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:taskendar/models/task.dart';
-import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
-import 'package:taskendar/tasks/taskCreator.dart';
-import 'package:taskendar/settings.dart';
-import 'package:taskendar/tasks/tasks.dart';
+import 'package:taskendar/models/taskProvider.dart';
 import 'package:taskendar/models/themeProvider.dart';
+import 'package:taskendar/settings.dart';
+import 'package:taskendar/tasks/taskCreator.dart';
+import 'package:taskendar/tasks/tasks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
 
 void main() {
   runApp(
@@ -74,10 +74,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    _fetchTasks();
+  }
+
+  Future<void> _fetchTasks() async {
+    await Provider.of<TaskProvider>(context, listen: false).fetchTasks();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.homeTitle),
+        title: Text(localization.homeTitle),
         leading: IconButton(
           icon: Icon(Icons.settings),
           onPressed: () {
@@ -88,7 +99,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.app_registration),
             onPressed: () {
-              Navigator.pushNamed(context, '/tasks');
+              Navigator.pushNamed(context, '/taskCreator');
             },
           ),
         ],
@@ -99,12 +110,12 @@ class _HomePageState extends State<HomePage> {
           if (constraints.maxWidth < 600) {
             // layout for mobile devices
             return Center(
-              child: Text(AppLocalizations.of(context)!.homeTitle),
+              child: Text(localization.homeTitle),
             );
           } else {
             // layout for larger screens
             return Center(
-              child: Text(AppLocalizations.of(context)!.homeTitle),
+              child: Text(localization.homeTitle),
             );
           }
         },
