@@ -1,0 +1,21 @@
+{
+  "@@locale": "uk",
+  "appTitle": "Taskendar",
+  "homeTitle": "Головна",
+  "settings": "Налаштування",
+  "tasks": "Завдання",
+  "createTask": "Створити завдання",
+  "taskCreator": "Створення завдання",
+  "enterTaskName": "Введіть назву завдання",
+  "enterTaskDescription": "Введіть опис завдання",
+  "selectDate": "Виберіть дату",
+  "selectTime": "Виберіть час",
+  "addTask": "Додати завдання",
+  "notifications": "Сповіщення",
+  "theme": "Тема",
+  "light": "Світла",
+  "dark": "Темна",
+  "language": "Мова",
+  "english": "Англійська",
+  "ukrainian": "Українська"
+}

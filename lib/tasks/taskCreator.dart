@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
 
 class TaskCreatorPage extends StatefulWidget {
   @override
@@ -43,7 +44,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Creator'),
+        title: Text(AppLocalizations.of(context)!.taskCreator), 
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56,28 +57,28 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
                   _taskName = value;
                 });
               },
-              decoration: const InputDecoration(
-                labelText: 'Enter task name',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.enterTaskName, 
+                border: const OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               onChanged: (value) {
                 setState(() {
                   _taskDescription = value;
                 });
               },
-              decoration: const InputDecoration(
-                labelText: 'Enter task description',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.enterTaskDescription, 
+                border: const OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
             TextField(
               controller: _dateController,
               decoration: InputDecoration(
-                labelText: 'Select date',
+                labelText: AppLocalizations.of(context)!.selectDate, 
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.calendar_today),
@@ -90,10 +91,10 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
             TextField(
               controller: _timeController,
               decoration: InputDecoration(
-                labelText: 'Select time',
-                border: OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.selectTime, 
+                border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.access_time),
+                  icon: const Icon(Icons.access_time),
                   onPressed: () => _selectTime(context),
                 ),
               ),
@@ -101,7 +102,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              child: const Text('Add task'),
+              child: Text(AppLocalizations.of(context)!.addTask), 
               onPressed: () {
                 Task task = Task(
                   name: _taskName,
