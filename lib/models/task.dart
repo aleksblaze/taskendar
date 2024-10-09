@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Task {
-  String name;
-  String description;
-  DateTime date;
-  TimeOfDay time;
+  final String name;
+  final String description;
+  final DateTime date;
+  final TimeOfDay time;
 
   Task({
     required this.name,
@@ -12,20 +12,25 @@ class Task {
     required this.date,
     required this.time,
   });
-}
 
-class TaskProvider with ChangeNotifier {
-  List<Task> _taskList = [];
-
-  List<Task> get taskList => _taskList;
-
-  void addTask(Task task) {
-    _taskList.add(task);
-    notifyListeners();
+  factory Task.fromJson(Map<String, dynamic> json) {
+    return Task(
+      name: json['name'],
+      description: json['description'],
+      date: DateTime.parse(json['date']),
+      time: TimeOfDay(
+        hour: int.parse(json['time'].split(':')[0]),
+        minute: int.parse(json['time'].split(':')[1]),
+      ),
+    );
   }
 
-  void sortTasks() {
-    _taskList.sort((a, b) => a.date.compareTo(b.date));
-    notifyListeners();
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'description': description,
+      'date': date.toIso8601String(),
+      'time': '${time.hour}:${time.minute}',
+    };
   }
 }

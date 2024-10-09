@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taskendar/models/taskProvider.dart';
-import 'package:taskendar/models/themeProvider.dart';
+import 'package:taskendar/models/task_provider.dart';
+import 'package:taskendar/models/theme_provider.dart';
 import 'package:taskendar/settings.dart';
-import 'package:taskendar/tasks/taskCreator.dart';
+import 'package:taskendar/tasks/task_creator.dart';
 import 'package:taskendar/tasks/tasks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:taskendar/unifiedWidgets/navigatorUni.dart';
+import 'package:taskendar/unifiedWidgets/navigator_uni.dart';
 
 void main() {
   runApp(
@@ -80,7 +80,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _fetchTasks() async {
-    await Provider.of<TaskProvider>(context, listen: false).fetchTasks();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Provider.of<TaskProvider>(context, listen: false).fetchTasks();
+    });
   }
 
   @override
