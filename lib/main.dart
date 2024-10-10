@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taskendar/firebase_options.dart';
 import 'package:taskendar/models/task_provider.dart';
 import 'package:taskendar/models/theme_provider.dart';
 import 'package:taskendar/settings.dart';
@@ -9,7 +11,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taskendar/unifiedWidgets/navigator_uni.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -85,7 +91,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
+    @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
     return Scaffold(
