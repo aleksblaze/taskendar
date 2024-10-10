@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:taskendar/tasks/taskCreator.dart';
+import 'package:taskendar/tasks/task_creator.dart';
 import 'package:provider/provider.dart';
-import 'package:taskendar/unifiedWidgets/taskCreatorUni.dart';
+import 'package:taskendar/unifiedWidgets/task_creator_uni.dart';
+import 'package:taskendar/models/task_provider.dart';
 import 'package:taskendar/models/task.dart';
-import 'package:taskendar/unifiedWidgets/appbarUni.dart';
+import 'package:taskendar/unifiedWidgets/appbar_uni.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
 
 class TasksPage extends StatefulWidget {
