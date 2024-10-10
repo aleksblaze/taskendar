@@ -14,7 +14,6 @@ class TaskProvider with ChangeNotifier {
       _taskList = await _networkService.fetchTasks();
       notifyListeners();
     } catch (e) {
-      // Обробка помилок
       print('Failed to fetch tasks: $e');
     }
   }
@@ -25,7 +24,6 @@ class TaskProvider with ChangeNotifier {
       _taskList.add(task);
       notifyListeners();
     } catch (e) {
-      // Обробка помилок
       print('Failed to save task: $e');
     }
   }
