@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
 import 'package:taskendar/global.dart';
+import 'package:taskendar/models/task_provider.dart';
 
 class TaskList extends StatelessWidget {
   @override

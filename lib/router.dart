@@ -3,7 +3,7 @@ import 'package:taskendar/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taskendar/tasks/tasks.dart';
 import 'package:taskendar/settings.dart';
-import 'package:taskendar/tasks/taskCreator.dart';
+import 'package:taskendar/tasks/task_creator.dart';
 
 const String AppTitle = 'Taskendar';
 
