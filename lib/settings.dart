@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:taskendar/models/themeProvider.dart';
+import 'package:taskendar/models/theme_provider.dart';
 import 'package:taskendar/main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "194814647114",
+    "project_id": "taskendar-412ad",
+    "storage_bucket": "taskendar-412ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194814647114:android:e79527ae9e1ef08f31ffb3",
+        "android_client_info": {
+          "package_name": "com.example.taskendar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnjOxJ6ZEp6gmAjL4E0LZdY8i_LQr-V0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
