@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 UnifiedCalendar(),
                 Center(
-                  child: Text(localization.homeTitle),
+                  child: Text(localization.upcomingEvents),
                 ),
                 Expanded(
                   child: ListView.builder(
