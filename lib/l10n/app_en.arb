@@ -1,0 +1,128 @@
+{
+  "@@locale": "en",
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "homeTitle": "Calendar",
+  "@homeTitle": {
+    "description": "The title of the home page"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings page title"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "Notifications page title"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language"
+  },
+  "ukrainian": "Ukrainian",
+  "@ukrainian": {
+    "description": "Ukrainian language"
+  },
+  "taskCreator": "Task Creator",
+  "@taskCreator": {
+    "description": "Task creator page title"
+  },
+  "enterTaskName": "Enter task name",
+  "@enterTaskName": {
+    "description": "Placeholder for task name input"
+  },
+  "enterTaskDescription": "Enter task description",
+  "@enterTaskDescription": {
+    "description": "Placeholder for task description input"
+  },
+  "createTask": "Create task",
+  "@createTask": {
+    "description": "Button text for creating a task"
+  },
+  "selectDate": "Select date",
+  "@selectDate": {
+    "description": "Button text for selecting a date"
+  },
+  "selectTime": "Select time",
+  "@selectTime": {
+    "description": "Button text for selecting a time"
+  },
+  "addTask": "Add task",
+  "@addTask": {
+    "description": "Button text for adding a task"
+  },
+  "tasks": "Tasks",
+  "@tasks": {
+    "description": "Tasks page title"
+  },
+  "addEvent": "Add event",
+  "@addEvent": {
+    "description": "Button text for adding an event"
+  },
+  "eventTitle": "Event title",
+  "@eventTitle": {
+    "description": "Placeholder for event title input"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button text for cancelling an action"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Button text for adding an item"
+  },
+  "eventsOn": "Events on",
+  "@eventsOn": {
+    "description": "Label for events on a specific date"
+  },
+  "oneDay": "In {count} day",
+  "@oneDay": {
+    "description": "Label for one day remaining",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "twoDays": "In {count} days",
+  "@twoDays": {
+    "description": "Label for two days remaining",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "inDays": "In {count} days",
+  "@inDays": {
+    "description": "Label for multiple days remaining",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Label for today"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Label for an error"
+  },
+  "upcomingEvents": "Upcoming events",
+  "@upcomingEvents": {
+    "description": "Label for upcoming events"
+  }
+}

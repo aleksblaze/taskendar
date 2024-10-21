@@ -1,0 +1,128 @@
+{
+  "@@locale": "uk",
+  "helloWorld": "Привіт Світ!",
+  "@helloWorld": {
+    "description": "Звичайне привітання новонародженого програміста"
+  },
+  "homeTitle": "Календар",
+  "@homeTitle": {
+    "description": "Назва головної сторінки"
+  },
+  "settings": "Налаштування",
+  "@settings": {
+    "description": "Назва сторінки налаштувань"
+  },
+  "notifications": "Сповіщення",
+  "@notifications": {
+    "description": "Назва сторінки сповіщень"
+  },
+  "theme": "Тема",
+  "@theme": {
+    "description": "Налаштування теми"
+  },
+  "light": "Світла",
+  "@light": {
+    "description": "Світла тема"
+  },
+  "dark": "Темна",
+  "@dark": {
+    "description": "Темна тема"
+  },
+  "language": "Мова",
+  "@language": {
+    "description": "Налаштування мови"
+  },
+  "english": "Англійська",
+  "@english": {
+    "description": "Англійська мова"
+  },
+  "ukrainian": "Українська",
+  "@ukrainian": {
+    "description": "Українська мова"
+  },
+  "taskCreator": "Створення завдання",
+  "@taskCreator": {
+    "description": "Назва сторінки створення завдання"
+  },
+  "enterTaskName": "Введіть назву завдання",
+  "@enterTaskName": {
+    "description": "Підказка для введення назви завдання"
+  },
+  "enterTaskDescription": "Введіть опис завдання",
+  "@enterTaskDescription": {
+    "description": "Підказка для введення опису завдання"
+  },
+  "createTask": "Створити завдання",
+  "@createTask": {
+    "description": "Текст кнопки для створення завдання"
+  },
+  "selectDate": "Виберіть дату",
+  "@selectDate": {
+    "description": "Текст кнопки для вибору дати"
+  },
+  "selectTime": "Виберіть час",
+  "@selectTime": {
+    "description": "Текст кнопки для вибору часу"
+  },
+  "addTask": "Додати завдання",
+  "@addTask": {
+    "description": "Текст кнопки для додавання завдання"
+  },
+  "tasks": "Завдання",
+  "@tasks": {
+    "description": "Назва сторінки завдань"
+  },
+  "addEvent": "Додати подію",
+  "@addEvent": {
+    "description": "Текст кнопки для додавання події"
+  },
+  "eventTitle": "Назва події",
+  "@eventTitle": {
+    "description": "Підказка для введення назви події"
+  },
+  "cancel": "Скасувати",
+  "@cancel": {
+    "description": "Текст кнопки для скасування дії"
+  },
+  "add": "Додати",
+  "@add": {
+    "description": "Текст кнопки для додавання елемента"
+  },
+  "eventsOn": "Події на",
+  "@eventsOn": {
+    "description": "Мітка для подій на певну дату"
+  },
+  "oneDay": "За {count} день",
+  "@oneDay": {
+    "description": "Мітка для одного дня залишилося",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "twoDays": "За {count} дні",
+  "@twoDays": {
+    "description": "Мітка для двох днів залишилося",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "inDays": "За {count} днів",
+  "@inDays": {
+    "description": "Мітка для кількох днів залишилося",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "today": "Сьогодні",
+  "@today": {
+    "description": "Мітка для сьогодні"
+  },
+  "error": "Помилка",
+  "@error": {
+    "description": "Мітка для помилки"
+  },
+  "upcomingEvents": "Найближчі події",
+  "@upcomingEvents": {
+    "description": "Мітка для найближчих подій"
+  }
+}
