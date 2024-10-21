@@ -12,6 +12,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taskendar/unifiedWidgets/navigator_uni.dart';
 import 'package:taskendar/unifiedWidgets/calendar_uni.dart';
 import 'package:taskendar/models/event_list.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -103,7 +105,6 @@ class LocaleProvider with ChangeNotifier {
 }
 
 class HomePage extends StatefulWidget {
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -160,30 +161,42 @@ class _HomePageState extends State<HomePage> {
                     itemCount: eventDatabase.getUpcomingEvents().length,
                     itemBuilder: (context, index) {
                       final event = eventDatabase.getUpcomingEvents()[index];
-                        return Padding(
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: ListTile(
-                          title: Center(
-                            child: Text(
-                            event.title,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            title: Center(
+                              child: Text(
+                                event.title,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(event.timeToEvent(context)),
+                              ],
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                            Text(event.timeToEvent(context)),
-                            ],
-                          ),
-                          ),
                         ),
-                        );
+                      );
                     },
+                  ),
+                ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final directory = await getApplicationDocumentsDirectory();
+                      final file = File('${directory.path}/example.txt');
+                      await file.writeAsString('Hello, world!');
+                      final contents = await file.readAsString();
+                      print(contents);
+                    },
+                    child: Text('Write to file'),
                   ),
                 ),
               ],
@@ -201,30 +214,42 @@ class _HomePageState extends State<HomePage> {
                     itemCount: eventDatabase.getUpcomingEvents().length,
                     itemBuilder: (context, index) {
                       final event = eventDatabase.getUpcomingEvents()[index];
-                        return Padding(
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           elevation: 4,
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: ListTile(
-                          title: Center(
-                            child: Text(
-                            event.title,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            title: Center(
+                              child: Text(
+                                event.title,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(event.timeToEvent(context)),
+                              ],
                             ),
                           ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                            Text(event.timeToEvent(context)),
-                            ],
-                          ),
-                          ),
                         ),
-                        );
+                      );
                     },
+                  ),
+                ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final directory = await getApplicationDocumentsDirectory();
+                      final file = File('${directory.path}/example.txt');
+                      await file.writeAsString('Hello, world!');
+                      final contents = await file.readAsString();
+                      print(contents);
+                    },
+                    child: Text('Write to file'),
                   ),
                 ),
               ],
