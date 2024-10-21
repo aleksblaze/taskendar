@@ -18,9 +18,18 @@ class NetworkServiceImpl implements NetworkService {
   @override
   Future<void> saveTask(Task task) async {
     try {
-      await _firestore.collection('tasks').add(task.toJson());
+      await _firestore.collection('tasks').doc(task.id).set(task.toJson());
     } catch (e) {
       throw Exception('Failed to save task: $e');
+    }
+  }
+
+  
+  Future<void> deleteTask(String id) async {
+    try {
+      await _firestore.collection('tasks').doc(id).delete();
+    } catch (e) {
+      throw Exception('Failed to delete task: $e');
     }
   }
 }

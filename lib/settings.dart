@@ -8,13 +8,27 @@ class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
+
 class _SettingsPageState extends State<SettingsPage> {
   bool switchValue = false;
   String _selectedTheme = 'Light';
-  String _selectedLanguage = 'en';
+  String _selectedLanguage = 'English';
+
+  @override
+  void initState() {
+    super.initState();
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+    _selectedTheme = themeProvider.selectedTheme;
+    _selectedLanguage = localeProvider.selectedLanguage;
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final localeProvider = Provider.of<LocaleProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localization.settings),
@@ -38,17 +52,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 value: _selectedTheme,
                 items: <String>['Light', 'Dark'].map((String value) {
                   return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value == 'Light' ? localization.light : localization.dark),
+                    value: value,
+                    child: Text(value),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedTheme = newValue!;
+                    if (_selectedTheme == 'Light') {
+                      themeProvider.setLightTheme();
+                    } else {
+                      themeProvider.setDarkTheme();
+                    }
                   });
-                  if (newValue != null) {
-                    _changeTheme(context, newValue);
-                  }
                 },
               ),
             ),
@@ -56,19 +72,21 @@ class _SettingsPageState extends State<SettingsPage> {
               title: Text(localization.language),
               trailing: DropdownButton<String>(
                 value: _selectedLanguage,
-                items: <String>['en', 'uk'].map((String value) {
+                items: <String>['English', 'Ukrainian'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value == 'en' ? localization.english : localization.ukrainian),
+                    child: Text(value),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedLanguage = newValue!;
+                    if (_selectedLanguage == 'English') {
+                      localeProvider.setLocale(Locale('en'), 'English');
+                    } else {
+                      localeProvider.setLocale(Locale('uk'), 'Ukrainian');
+                    }
                   });
-                  if (newValue != null) {
-                    _changeLanguage(context, newValue);
-                  }
                 },
               ),
             ),
@@ -76,19 +94,5 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
-  }
-
-  void _changeTheme(BuildContext context, String theme) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);
-    if (theme == 'Light') {
-      themeProvider.setLightTheme();
-    } else if (theme == 'Dark') {
-      themeProvider.setDarkTheme();
-    }
-  }
-
-  void _changeLanguage(BuildContext context, String languageCode) {
-    LocaleProvider localeProvider = Provider.of<LocaleProvider>(context, listen: false);
-    localeProvider.setLocale(Locale(languageCode));
   }
 }

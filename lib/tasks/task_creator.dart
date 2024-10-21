@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taskendar/models/task.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:taskendar/models/task_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class TaskCreatorPage extends StatefulWidget {
   @override
@@ -14,6 +15,9 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
   TextEditingController _timeController = TextEditingController();
   String _taskName = '';
   String _taskDescription = '';
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
+  final Uuid _uuid = Uuid();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -22,8 +26,9 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != DateTime.now()) {
+    if (picked != null) {
       setState(() {
+        _selectedDate = picked;
         _dateController.text = "${picked.toLocal()}".split(' ')[0];
       });
     }
@@ -36,6 +41,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
     );
     if (picked != null) {
       setState(() {
+        _selectedTime = picked;
         _timeController.text = picked.format(context);
       });
     }
@@ -45,7 +51,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.taskCreator), 
+        title: Text(AppLocalizations.of(context)!.taskCreator),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,7 +65,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
                 });
               },
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.enterTaskName, 
+                labelText: AppLocalizations.of(context)!.enterTaskName,
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -71,7 +77,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
                 });
               },
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.enterTaskDescription, 
+                labelText: AppLocalizations.of(context)!.enterTaskDescription,
                 border: const OutlineInputBorder(),
               ),
             ),
@@ -79,7 +85,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
             TextField(
               controller: _dateController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.selectDate, 
+                labelText: AppLocalizations.of(context)!.selectDate,
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.calendar_today),
@@ -92,7 +98,7 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
             TextField(
               controller: _timeController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.selectTime, 
+                labelText: AppLocalizations.of(context)!.selectTime,
                 border: const OutlineInputBorder(),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.access_time),
@@ -103,17 +109,34 @@ class _TaskCreatorState extends State<TaskCreatorPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              child: Text(AppLocalizations.of(context)!.addTask), 
+              child: Text(AppLocalizations.of(context)!.addTask),
               onPressed: () {
-                Task task = Task(
-                  name: _taskName,
-                  description: _taskDescription,
-                  date: DateTime.now(),
-                  time: TimeOfDay.now(),
-                );
+                if (_selectedDate != null && _selectedTime != null) {
+                  final DateTime taskDateTime = DateTime(
+                    _selectedDate!.year,
+                    _selectedDate!.month,
+                    _selectedDate!.day,
+                    _selectedTime!.hour,
+                    _selectedTime!.minute,
+                  );
 
-                context.read<TaskProvider>().addTask(task);
-                Navigator.pushNamed(context, '/tasks');
+                  Task task = Task(
+                    id: _uuid.v4(),
+                    name: _taskName,
+                    description: _taskDescription,
+                    date: taskDateTime,
+                    time: _selectedTime!,
+                  );
+
+                  context.read<TaskProvider>().addTask(task);
+                  Navigator.pushNamed(context, '/tasks');
+                } else {
+                  // Show an error message if date or time is not selected
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text(AppLocalizations.of(context)!.error)),
+                  );
+                }
               },
             ),
           ],

@@ -10,18 +10,46 @@ import 'package:taskendar/tasks/tasks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taskendar/unifiedWidgets/navigator_uni.dart';
+import 'package:taskendar/unifiedWidgets/calendar_uni.dart';
+import 'package:taskendar/models/event_list.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final ThemeData defaultTheme = ThemeData(
+    brightness: Brightness.light,
+    primarySwatch: Colors.green,
+    useMaterial3: false,
+    textTheme: TextTheme(
+      headlineLarge: TextStyle(
+          fontSize: 32.0,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+          fontFamily: 'Roboto'),
+      bodyLarge:
+          TextStyle(fontSize: 16.0, color: Colors.black, fontFamily: 'Roboto'),
+    ),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.green,
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 24.0,
+        fontFamily: 'Roboto',
+      ),
+    ),
+  );
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TaskProvider()),
-        ChangeNotifierProvider(create: (context) => ThemeProvider(ThemeData.light())),
+        ChangeNotifierProvider(
+            create: (context) => ThemeProvider(defaultTheme)),
         ChangeNotifierProvider(create: (context) => LocaleProvider()),
+        ChangeNotifierProvider(create: (context) => EventDatabase()),
       ],
       child: MyApp(),
     ),
@@ -62,11 +90,14 @@ class MyApp extends StatelessWidget {
 
 class LocaleProvider with ChangeNotifier {
   Locale _locale = Locale('en');
+  String _selectedLanguage = 'English';
 
   Locale get locale => _locale;
+  String get selectedLanguage => _selectedLanguage;
 
-  void setLocale(Locale locale) {
+  void setLocale(Locale locale, String languageName) {
     _locale = locale;
+    _selectedLanguage = languageName;
     notifyListeners();
   }
 }
@@ -91,9 +122,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
+    final eventDatabase = Provider.of<EventDatabase>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localization.homeTitle),
@@ -117,13 +150,53 @@ class _HomePageState extends State<HomePage> {
         builder: (context, constraints) {
           if (constraints.maxWidth < 600) {
             // layout for mobile devices
-            return Center(
-              child: Text(localization.homeTitle),
+            return Column(
+              children: [
+                UnifiedCalendar(),
+                Center(
+                  child: Text(localization.homeTitle),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: eventDatabase.getUpcomingEvents().length,
+                    itemBuilder: (context, index) {
+                      final event = eventDatabase.getUpcomingEvents()[index];
+                      return Center(
+                        child: ListTile(
+                          title: Center(child: Text(event.title)),
+                          subtitle:
+                              Center(child: Text(event.timeToEvent(context))),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           } else {
             // layout for larger screens
-            return Center(
-              child: Text(localization.homeTitle),
+            return Column(
+              children: [
+                UnifiedCalendar(),
+                Center(
+                  child: Text(localization.homeTitle),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: eventDatabase.getUpcomingEvents().length,
+                    itemBuilder: (context, index) {
+                      final event = eventDatabase.getUpcomingEvents()[index];
+                      return Center(
+                        child: ListTile(
+                          title: Center(child: Text(event.title)),
+                          subtitle:
+                              Center(child: Text(event.timeToEvent(context))),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           }
         },
