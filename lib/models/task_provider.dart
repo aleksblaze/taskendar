@@ -28,6 +28,16 @@ class TaskProvider with ChangeNotifier {
     }
   }
 
+  Future<void> deleteTask(String id) async {
+    try {
+      await _networkService.deleteTask(id);
+      _taskList.removeWhere((task) => task.id == id);
+      notifyListeners();
+    } catch (e) {
+      print('Failed to delete task: $e');
+    }
+  }
+
   void sortTasks() {
     _taskList.sort((a, b) => a.date.compareTo(b.date));
     notifyListeners();
