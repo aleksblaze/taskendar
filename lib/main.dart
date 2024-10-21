@@ -103,7 +103,6 @@ class LocaleProvider with ChangeNotifier {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -140,7 +139,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: Icon(Icons.app_registration),
             onPressed: () {
-              Navigator.pushNamed(context, '/taskCreator');
+              Navigator.pushNamed(context, '/tasks');
             },
           ),
         ],
@@ -161,13 +160,29 @@ class _HomePageState extends State<HomePage> {
                     itemCount: eventDatabase.getUpcomingEvents().length,
                     itemBuilder: (context, index) {
                       final event = eventDatabase.getUpcomingEvents()[index];
-                      return Center(
-                        child: ListTile(
-                          title: Center(child: Text(event.title)),
-                          subtitle:
-                              Center(child: Text(event.timeToEvent(context))),
+                        return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ListTile(
+                          title: Center(
+                            child: Text(
+                            event.title,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                            Text(event.timeToEvent(context)),
+                            ],
+                          ),
+                          ),
                         ),
-                      );
+                        );
                     },
                   ),
                 ),
@@ -179,20 +194,36 @@ class _HomePageState extends State<HomePage> {
               children: [
                 UnifiedCalendar(),
                 Center(
-                  child: Text(localization.homeTitle),
+                  child: Text(localization.upcomingEvents),
                 ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: eventDatabase.getUpcomingEvents().length,
                     itemBuilder: (context, index) {
                       final event = eventDatabase.getUpcomingEvents()[index];
-                      return Center(
-                        child: ListTile(
-                          title: Center(child: Text(event.title)),
-                          subtitle:
-                              Center(child: Text(event.timeToEvent(context))),
+                        return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ListTile(
+                          title: Center(
+                            child: Text(
+                            event.title,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                            Text(event.timeToEvent(context)),
+                            ],
+                          ),
+                          ),
                         ),
-                      );
+                        );
                     },
                   ),
                 ),
